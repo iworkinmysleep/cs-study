@@ -1,0 +1,93 @@
+Understand
+
+1. Can I restate the problem in my own words?
+2. Inputs and outputs
+3. Do I have enough info to solve the problem? (can the outputs be determined from the inputs?)
+4. How should I label the important pieces of the problem?
+
+Concrete examples
+
+1. Start with simple examples
+2. Progress to more complexity
+3. Edge cases (invalid inputs)
+// Write a function which takes in a string and returns counts of each char in the string.
+charCount('hello'); // {h:1, e:1, l:2, o:1}
+charCount('aaaa'); // {a:4, ?(b:0, c:0)}
+charCount('my phone number is 182763')
+charCount('Hello hi')
+charCount("")
+charCount(null)
+
+Break it down
+
+1. Explicitly write out the steps you need to take (psuedo code)
+
+// Write a function which takes in a string and returns counts of each char in the string.
+function charCount(str){
+  // do something
+  // return an object with keys that are lowercase alphanumeric characters in the string
+}
+function charCount(str){
+  // make object to return at end
+  // loop over string, for each char...
+      // if the char is a a number/letter AND key in object, add one to count
+      // if the char is a number/ letter AND not in object, add it and set value to 1 
+      // if char is something else (space, period, etc.) don't do anything
+
+  // return object at end
+}
+
+
+Solve or simplify
+
+If you get stuck...
+1. Find the core difficulty in what you're trying to do
+2. Temporarily ignore that difficulty
+3. Write a simplified solution
+4. Then incorporate that difficulty back in
+
+function charCount(str){
+  // make object to return at end
+  let result = {};
+  // loop over string, for each char...
+  for (let i = 0; i < str.length; i++) {
+      let char = str[i].toLowerCase()
+      // if char is something else (space, period, etc.) don't do anything
+      if (/[a-z0-9]/.test(char)) {
+        // if the char is a a number/letter AND key in object, add one to count
+        if (result[char] > 0) {
+          result[char] ++
+        } else {
+          // if the char is a number/ letter AND not in object, add it and set value to 1 
+          result[char] = 1
+        }
+      }
+    }
+      
+  // return object at end
+    return result;
+}
+
+
+Refactor
+
+function charCount(str) {
+  let result = {};
+  for (let char of str) {
+    if (isAlphaNumeric(char)) {
+    char = char.toLowerCase();
+      result[char] = ++result[char] || 1;
+    }
+  }
+  return result;
+}
+
+function isAlphaNumeric(char) {
+  let code = char.charCodeAt(0);
+  if (!(code > 47 && code < 58) && //numeric (0-9)
+      !(code > 64 && code < 91) && //upper alpha (A-Z)
+      !(code > 96 && code < 123)) { //lower alpha (a-z)
+        return false;
+      }
+      return true;
+}
