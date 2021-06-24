@@ -31,3 +31,6 @@ function maxSubarraySumRefactored(arr, num) {
 	}
 	return maxSum;
 }
+
+console.log(maxSubarraySum([100, 200, 300, 400], 2))
+
