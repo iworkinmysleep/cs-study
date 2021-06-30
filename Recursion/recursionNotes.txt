@@ -1,0 +1,70 @@
+Two essential parts of a recursive function!
+1. Base case
+2. Different input (call the same function but with different data)
+
+simple recursive function
+function countDown(num) {
+  if (num <= 0) {
+    console.log("All done!");
+    return;
+  }
+  console.log(num);
+  num--;
+  countDown(num)
+}
+
+second simple function
+function sumRange(num) {
+  in(num === 1) return 1;
+  return num + sumRange(num-1)
+}
+
+the classic function for recursion
+function factorial(num) {
+  if (num === 1) return 1;
+  return num * factorial(num-1)
+}
+
+Where things go wrong
+1. No base case
+2. Forgetting to return or returning the wrong thing
+3. Stack overflow!
+
+
+*Helper method recursion
+function collectOddValues(arr) {
+  let result = []
+
+  function helper(helperInput) {
+    if(helperInput.length === 0) {
+      return;
+    }
+    if(helperInput[0] % 2 !== 0) {
+      result.push(helperInput[0])
+    }
+    helperInput.slice(1)
+  }
+  helper(arr)
+  return result;
+}
+
+*Same function with pure recursion
+function collectOddValues(arr){
+    let newArr = [];
+    
+    if(arr.length === 0) {
+        return newArr;
+    }
+        
+    if(arr[0] % 2 !== 0){
+        newArr.push(arr[0]);
+    }
+        
+    newArr = newArr.concat(collectOddValues(arr.slice(1)));
+    return newArr;
+}
+
+**Tips
+1. For arrays, use methods like slice, the spread operator, and concat that make copies of arrays so you do not mutate them (for pure recursion)
+2. Remember that strings are immutable so you will need to use methods like slice, substr, or substring to make copies of strings
+3. To make copies of objects use Object.assign, or the spread operator

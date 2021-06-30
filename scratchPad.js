@@ -1,25 +1,17 @@
-function charCount(str) {
-	const result = {};
-	for (let char of str) {
-		if (isAlphaNumeric(char)) {
-			char = char.toLowerCase();
-			result[char] = ++result[char] || 1;
+function collectOddValues(arr) {
+	let result = [];
+
+	function helper(helperInput) {
+		if (helperInput.length === 0) {
+			return;
 		}
+		if (helperInput[0] % 2 !== 0) {
+			result.push(helperInput[0]);
+		}
+		helper(helperInput.slice(1));
 	}
+	helper(arr);
 	return result;
 }
 
-function isAlphaNumeric(char) {
-	let code = char.charCodeAt(0);
-	if (
-		!(code > 47 && code < 58) && //numeric (0-9)
-		!(code > 64 && code < 91) && //upper alpha (A-Z)
-		!(code > 96 && code < 123)
-	) {
-		//lower alpha (a-z)
-		return false;
-	}
-	return true;
-}
-
-
+console.log(collectOddValues([1, 2, 3, 4, 5, 6, 7, 8, 9]));
